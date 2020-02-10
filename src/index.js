@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
-import createStore from './store';
+//import createStore from './store';
+import {store} from './store';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const routes = (
-	<Provider store={createStore()}>
+	<Provider store={store}>
 		<Router>
 			<GlobalStyle />
 			<App>

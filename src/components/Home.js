@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import { fetchRoots } from '../actions';
 import sentenceCase from 'sentence-case';
+import * as actions from '../store/actions';
 import {
 	Nav,
 	NavItem,
@@ -15,18 +15,18 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const [tab, setTab] = useState(void 0);
 	const roots = useSelector(state => state.roots);
+	const loading = useSelector(state => state.loading);
 
 	useEffect(() => {
-		dispatch(fetchRoots());
-	}, [dispatch]);
+		dispatch(actions.getRoots());
+	}, []);
 
-	const keys = Object.keys(roots.payload || {});
-
+	const keys = Object.keys(roots || {});
 	return (
 		<div>
 			<h1>{'My little Star Wars app 👾'}</h1>
-
-			{roots.payload && (
+			{loading ? 'loading' : 'not loading'}
+			{keys  && (
 				<div className={'mt-3'}>
 					<Nav tabs>
 						{keys.map(k => (
@@ -47,6 +47,7 @@ const Home = () => {
 								key={k}
 								tabId={k}
 							>
+								
 								<code>{'todo: load resource table'}</code>
 							</TabPane>
 						))}
