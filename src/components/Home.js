@@ -23,6 +23,7 @@ const Home = () => {
 	}, []);
 
 	const keys = Object.keys(roots || {});
+
 	return (
 		<div>
 			<h1>{'My little Star Wars app 👾'}</h1>

@@ -2,6 +2,7 @@ import * as actions from '../store/actions';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable from '../layout/DataTable';
+import ExpandButton from '../layout/UI/Button/ExpandButton';
 
 const TableView = (props) => {
     const {resourceType} = props;
@@ -16,17 +17,23 @@ const TableView = (props) => {
     return (
         <div>
             {data && (
+
                 <DataTable columns={headers}>
                     {data.map((resource, idx) => (
                         <tr key={resource.url}>
                             {Object.keys(resource).map((item, idx) => (
                                 <td key={resource.url+ idx}>
-                                    {Array.isArray(resource[item]) ? resource[item].join(' ') : resource[item]}
+
+                                    {Array.isArray(resource[item]) ? 
+                                        <ExpandButton text={resource[item]}>Expand </ExpandButton> :
+                                        resource[item] 
+                                    }
+
                                 </td>
                             ))}
                         </tr>
                     ))}
-            </DataTable>
+                </DataTable>
             )}
         </div>
     )
