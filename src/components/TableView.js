@@ -14,10 +14,19 @@ const TableView = (props) => {
         dispatch(actions.getResource(resourceType));
     }, []);
 
+    const renderText = (item) => {
+        if (item && typeof item === 'string' && item.startsWith('http')) {
+            const endpoint = item.split('/');
+            const link = endpoint[4] + '/' + endpoint[5]
+            return (<a href={link}>{link}</a>)
+        } else {
+            return item;
+        }
+    }
+
     return (
         <div>
             {data && (
-
                 <DataTable columns={headers}>
                     {data.map((resource, idx) => (
                         <tr key={resource.url}>
@@ -25,8 +34,8 @@ const TableView = (props) => {
                                 <td key={resource.url+ idx}>
 
                                     {Array.isArray(resource[item]) ? 
-                                        <ExpandButton text={resource[item]}>Expand </ExpandButton> :
-                                        resource[item] 
+                                        <ExpandButton text={resource[item]}>Expand</ExpandButton> :
+                                        renderText(resource[item])
                                     }
 
                                 </td>
