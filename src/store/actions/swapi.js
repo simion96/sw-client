@@ -20,3 +20,25 @@ export const getRootsFail = error => {
         payload: error
     };
 };
+
+export const getResource = (resourceType) => {
+    return {
+        type: actionTypes.FETCH_RESOURCE,
+        resourceType: resourceType
+    }
+}
+
+export const getResourceSuccess = (resourceType, response) => {
+    return {
+        type: actionTypes.FETCH_RESOURCE_SUCCESS,
+        resourceType: resourceType,
+        payload: response
+    }
+}
+
+export const getResourceFail = error => {
+    return {
+        type: actionTypes.FETCH_RESOURCE_FAILURE,
+        payload: error
+    }
+}

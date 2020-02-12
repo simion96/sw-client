@@ -1,5 +1,8 @@
 export {
     getRoots,
     getRootsSuccess,
-    getRootsFail
+    getRootsFail,
+    getResource,
+    getResourceSuccess,
+    getResourceFail
 } from './swapi';
