@@ -5,8 +5,8 @@ const DataTable = ({children, columns}) => (
         <thead>
             <tr>
                 {columns.map(col => (
-                    <th key={col} style={{widths: 'auto' }}>
-                        {col}
+                    <th key={col} style={{widths: 'auto', float: 'top'}}>
+                        {col.replace('_', ' ')}
                     </th>
                 ))}
             </tr>

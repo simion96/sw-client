@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable from '../layout/DataTable';
 import ExpandButton from '../layout/UI/Button/ExpandButton';
+import {Link} from 'react-router-dom';
 
 const TableView = (props) => {
     const {resourceType} = props;
@@ -18,7 +19,7 @@ const TableView = (props) => {
         if (item && typeof item === 'string' && item.startsWith('http')) {
             const endpoint = item.split('/');
             const link = endpoint[4] + '/' + endpoint[5]
-            return (<a href={link}>{link}</a>)
+            return (<Link to={link}>{link}</Link>)
         } else {
             return item;
         }
@@ -33,7 +34,7 @@ const TableView = (props) => {
                             {Object.keys(resource).map((item, idx) => (
                                 <td key={resource.url+ idx}>
 
-                                    {Array.isArray(resource[item]) ? 
+                                    {Array.isArray(resource[item]) && resource[item].length > 0 ? 
                                         <ExpandButton text={resource[item]}>Expand</ExpandButton> :
                                         renderText(resource[item])
                                     }

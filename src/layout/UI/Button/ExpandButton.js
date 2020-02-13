@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Modal from '../Modal/Modal';
 import classes from './ExpandButton.module.css';
+import {Link} from 'react-router-dom';
 
 
 const ExpandButton = (props) => {
@@ -16,7 +17,9 @@ const ExpandButton = (props) => {
 
     const transformText = (text) => {
         return text.map(link => (
-            <a href='/h'><p>{link}</p></a>
+            <Link to={link} key={link}>
+                <p>{link}</p>
+            </Link>
         ));
     }
 
