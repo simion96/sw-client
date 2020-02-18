@@ -30,7 +30,9 @@ const StyledTable = styled.table`
             th {
                 padding: .5rem;
                 text-align: left;
-                border-bottom: 2px solid black;
+                border-bottom: 2px solid lightgrey;
+                background-color: #600080;
+                color: white;
             }
         }
     }
@@ -40,7 +42,7 @@ const StyledTable = styled.table`
             border-top: 1px solid black;
 
             &:nth-child(even) {
-                background: lightgrey;
+                background: #e6e6ff;
             }
 
             td {

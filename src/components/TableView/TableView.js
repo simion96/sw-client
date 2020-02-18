@@ -1,5 +1,5 @@
 import * as actions from '../../store/actions';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable from '../../layout/UI/DataTable/DataTable';
 import ExpandButton from '../../layout/UI/Button/ExpandButton';
@@ -46,14 +46,14 @@ const TableView = (props) => {
             return (
                 <button
                     onClick={() => dispatch(actions.setFavouriteResource(resType, url))}>
-                    <img src={require('../../assets/img/heart-outline-24-filled.png')}></img>
+                    <img src={require('../../assets/img/heart-outline-24-filled.png')} alt="favourite"></img>
                 </button>
             )
         } else {
             return (
                 <button
                     onClick={() => dispatch(actions.setFavouriteResource(resType, url))}>
-                    <img src={require('../../assets/img/heart-outline-24.png')}></img>
+                    <img src={require('../../assets/img/heart-outline-24.png')} alt="non-favourite"></img>
                 </button>
             )
         }

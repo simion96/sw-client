@@ -1,5 +1,4 @@
-import {all, fork} from 'redux-saga/effects';
-import { takeEvery, takeLatest } from "redux-saga/effects";
+import { takeEvery } from "redux-saga/effects";
 import {
     fetchRootsSaga,
     fetchResourceSaga

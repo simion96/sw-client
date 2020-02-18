@@ -22,14 +22,16 @@ const Home = () => {
 
 	useEffect(() => {
 		dispatch(actions.getRoots());
-	}, []);
+	}, [dispatch]);
 
 	const keys = Object.keys(roots || {});
 
 	return (
 		<div>
 			<h1>{'My little Star Wars app 👾'}</h1>
-			<button onClick={()=> setFavouritesActive(!favouritesActive)}>ToggleFavourites</button>
+			<button onClick={()=> setFavouritesActive(!favouritesActive)} style={{float: 'right'}}>
+					Toggle Favourites
+			</button>
 			{loading ? <Loading isLoading={loading} /> : null}
 			{keys  && (
 				<div className={'mt-3'}>

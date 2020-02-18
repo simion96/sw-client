@@ -5,10 +5,8 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
-//import createStore from './store';
 import {store} from './store';
 import { Route, Switch } from 'react-router-dom';
-import {BrowserRouter} from 'react-router-dom';
 import {Router} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserHistory } from "history";
@@ -38,7 +36,6 @@ const routes = (
 						path={['/people/:id', '/starships/:id', '/vehicles/:id', '/species/:id', '/films/:id', '/planets/:id']}
 						exact
 						component={ResourceDisplay}
-						
 					/>
 				</Switch>
 			</App>

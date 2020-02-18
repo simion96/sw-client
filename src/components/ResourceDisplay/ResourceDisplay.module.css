@@ -4,11 +4,11 @@
     flex: 1 1 auto;
     padding: 2rem;
     padding-bottom: 3rem;
-    background-color: whitesmoke;
+    background-color: #e6e6ff;
 
     margin: 0 auto;
     width: 100%;
-    max-width: 1400px; /* add media queries*/
+    max-width: 1400px;
 }
 
 .DisplayWrapper {
@@ -42,12 +42,10 @@
     flex-direction: row; 
     padding: 8px;
     color: black;
-    border-top: 1px solid lightslategray;
+    border-bottom: 1px solid lightslategray;
 }
 
-.Row:nth-of-type(even) {
-    background: grey;
-}
+
 
 .Row:last-of-type {
     border-bottom: 1px solid lightslategrey;

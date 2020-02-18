@@ -9,8 +9,8 @@ const createStringDisplays = (val) => (
     Object.keys(val).map(item => (
         <div key={item}>
             { Array.isArray(val[item]) && val[item].length > 0 ?
-                undefined:
-                <div className={classes.Row}>
+                null :
+                <div key={item} className={classes.Row}>
                     {item.replace(/_/g, ' ')}:
                     <span style={{float: "right"}}>
                         {renderText(val[item])}
@@ -27,7 +27,7 @@ const createArrayDisplays = (val) => (
             { Array.isArray(val[item]) && val[item].length > 0 ?
                 <div className={classes.Column}>
                     <div className={classes.Row}>
-                        {item}
+                        <strong>{item}</strong>
                     </div>
                     {val[item].map(el => (
                         <div key={el} className={classes.Row}>
@@ -75,6 +75,10 @@ const ResourceDisplay = (props) => {
                     {createArrayDisplays(currentResource)}
                 </div>
             </div>
+            )}
+
+            {!currentResource && (
+                <h2>No data available</h2>
             )}
         </div>
     );
