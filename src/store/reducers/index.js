@@ -40,8 +40,8 @@ const reducer = (state = initialState, action) => {
             const payload = action.payload.results.map(el => ({
                 isFavourite: favs.includes(el.url),
                 ...el,
-                created: new Date(el.created).toISOString().substring(0, 10),
-                edited: new Date(el.edited).toISOString().substring(0, 10)
+                created: new Date(el.created).toISOString().substring(0, 10).toString(),
+                edited: new Date(el.edited).toISOString().substring(0, 10).toString()
             }));
             return {
                 ...state, 

@@ -1,16 +1,22 @@
-import * as actions from '../store/actions';
+import * as actions from '../../store/actions';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DataTable from '../layout/DataTable';
-import ExpandButton from '../layout/UI/Button/ExpandButton';
+import DataTable from '../../layout/UI/DataTable/DataTable';
+import ExpandButton from '../../layout/UI/Button/ExpandButton';
 import {Link} from 'react-router-dom';
 import { isBoolean } from 'util';
 
 const TableView = (props) => {
-    const {resourceType} = props;
+    const {resourceType, favouritesActive} = props;
     const dispatch = useDispatch();
-    const data = useSelector(state => state[resourceType+'']);
     const headers = useSelector(state => state[resourceType+'_headers']);
+    const data = useSelector(state => {
+        if (!favouritesActive) {
+            return state[resourceType];
+        } else {
+            return state[resourceType].filter(item => item.isFavourite);
+        }
+    });
 
     useEffect(() => {
         dispatch(actions.getResource(resourceType));
@@ -39,14 +45,14 @@ const TableView = (props) => {
             return (
                 <button
                     onClick={() => dispatch(actions.setFavouriteResource(resType, url))}>
-                    <img src={require('../assets/img/heart-outline-24-filled.png')}></img>
+                    <img src={require('../../assets/img/heart-outline-24-filled.png')}></img>
                 </button>
             )
         } else {
             return (
                 <button
                     onClick={() => dispatch(actions.setFavouriteResource(resType, url))}>
-                    <img src={require('../assets/img/heart-outline-24.png')}></img>
+                    <img src={require('../../assets/img/heart-outline-24.png')}></img>
                 </button>
             )
         }

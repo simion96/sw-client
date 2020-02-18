@@ -15,19 +15,27 @@ const ExpandButton = (props) => {
         setShowModal(true);
     }
 
-    const transformText = (text) => {
-        return text.map(link => (
-            <Link to={link} key={link}>
-                <p>{link}</p>
-            </Link>
-        ));
+    const transformText = (links) => {
+        return links.map(link => {
+            const endpoint = link.split('/');
+            const localResource = '/' + endpoint[4] + '/' + endpoint[5];
+            return (
+                <Link to={localResource} key={localResource}>
+                    <p>{localResource}</p>
+                </Link>
+            )
+        })
+
     }
 
     return (
         <div>
-            <Modal show={showModal} modalClosed={cancelModalHandler}>
-                    {transformText(props.text)}
-            </Modal>
+            {showModal 
+                ?  <Modal show={showModal} modalClosed={cancelModalHandler}>
+                        {transformText(props.text)}
+                    </Modal> 
+                : null 
+            }
             <button
                 className={classes.Button}
                 onClick={openModalHandler}>{props.children}</button>

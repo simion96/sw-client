@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Navbar, NavbarBrand } from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 const App = ({ children }) => (
 	<div className={'App'}>
@@ -8,7 +9,7 @@ const App = ({ children }) => (
 			
 			light
 		>
-			<NavbarBrand href={'/'}>{'Star Wars Client'}</NavbarBrand>
+			<NavbarBrand tag={Link} to={'/'}>{'Star Wars Client'}</NavbarBrand>
 		</Navbar>
 
 		<Container className={'pt-5'}>

@@ -7,7 +7,6 @@ export function* fetchRootsSaga(action) {
     const url = 'https://swapi.co/api/';
     try {
         const response = yield call(getRoots, action.resourceType);
-        //yield console.log(response);
         yield put(actions.getRootsSuccess(response));
     } catch (e) {
         yield console.log("got error");
@@ -15,11 +14,22 @@ export function* fetchRootsSaga(action) {
     }
 }
 
+
 export function* fetchResourceSaga(action) {
     try {
-        const response = yield call(getRoot, action.resourceType);
+        let response = yield call(getRoot, action.resourceType);
         yield put(actions.getResourceSuccess(action.resourceType, response));
-    } catch (e) {
+
+        //fetch all next pages if available
+        if (response.next !== null) {
+            let index = 2;
+            while (response.next !== null) {
+                const nextLinkSuffix = `/?page=${index++}`;
+                response = yield call(getRoot, action.resourceType+nextLinkSuffix);
+                yield put(actions.getResourceSuccess(action.resourceType, response));
+            }
+        }
+    } catch(e) {
         yield console.log("got error");
         yield console.log(e);
         yield put(actions.getResourceFail(e));

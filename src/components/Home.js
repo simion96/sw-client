@@ -10,12 +10,13 @@ import {
 } from 'reactstrap';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import TableView from './TableView';
+import TableView from './TableView/TableView';
 import Loading from '../layout/UI/Loading/Loading';
 
 const Home = () => {
 	const dispatch = useDispatch();
 	const [tab, setTab] = useState(void 0);
+	const [favouritesActive, setFavouritesActive] = useState(false);
 	const roots = useSelector(state => state.roots);
 	const loading = useSelector(state => state.loading);
 
@@ -28,6 +29,7 @@ const Home = () => {
 	return (
 		<div>
 			<h1>{'My little Star Wars app 👾'}</h1>
+			<button onClick={()=> setFavouritesActive(!favouritesActive)}>ToggleFavourites</button>
 			{loading ? <Loading isLoading={loading} /> : null}
 			{keys  && (
 				<div className={'mt-3'}>
@@ -50,7 +52,7 @@ const Home = () => {
 								key={k}
 								tabId={k}
 							>
-								<TableView resourceType={k}></TableView>
+								<TableView resourceType={k} favouritesActive={favouritesActive}></TableView>
 							</TabPane>
 						))}
 					</TabContent>

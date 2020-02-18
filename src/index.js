@@ -1,13 +1,15 @@
 import App from './components/App';
 import Home from './components/Home';
-import ResourceDisplay from './components/ResourceDisplay';
+import ResourceDisplay from './components/ResourceDisplay/ResourceDisplay';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
 //import createStore from './store';
 import {store} from './store';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
+import {Router} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserHistory } from "history";
 
