@@ -4,7 +4,7 @@ import {updateObject} from '../../util/utility';
 const initialState = {
     roots: null,
     loading: false,
-    error: null,
+    error: 'lmoa',
     people: [],
     planets: [],
     films: [],
@@ -30,6 +30,8 @@ const reducer = (state = initialState, action) => {
             return {...state, loading: true};
         case actionTypes.FETCH_ROOTS_SUCCESS:
             return {...state, loading: false, roots: action.payload };
+        case actionTypes.FETCH_RESOURCE_FAILURE:
+            return {...state, loading: false, error: action.payload };
         case actionTypes.FETCH_RESOURCE:
             return {
                 ...state,
@@ -49,6 +51,10 @@ const reducer = (state = initialState, action) => {
                 [action.resourceType]: [...state[action.resourceType]].concat(payload),
                 [action.resourceType+'_headers']: getHeaders(action.payload.results)
             };
+        case actionTypes.FETCH_RESOURCE_FAILURE:
+            return {...state, loading: false, error: action.payload };
+        case actionTypes.CLEAR_ERRORS:
+            return {...state, loading: false, error: null}
         case actionTypes.SET_FAVOURITE_RESOURCE:
             const resIndex = state[action.payload.resourceType].findIndex(p => p.url === action.payload.url);
             const updatedState = JSON.parse(JSON.stringify(state));

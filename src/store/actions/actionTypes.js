@@ -7,3 +7,4 @@ export const FETCH_RESOURCE_FAILURE = '@@internal/FETCH_RESOURCE_FAILURE';
 export const FETCH_RESOURCE_SUCCESS = '@@internal/FETCH_RESOURCE_SUCCESS';
 
 export const SET_FAVOURITE_RESOURCE = '@@internal/SET_FAVOURITE_RESOURCE';
+export const CLEAR_ERRORS = '@@internal/CLEAR_ERRORS'

@@ -56,3 +56,9 @@ export const setFavouriteResource = (resourceType, url) => {
         }
     }
 }
+
+export const clearErrors = () => {
+    return {
+        type: actionTypes.CLEAR_ERRORS
+    }
+}

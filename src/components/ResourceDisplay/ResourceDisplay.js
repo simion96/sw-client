@@ -48,8 +48,8 @@ const renderText = (item) => {
         const link = '/' + endpoint[4] + '/' + endpoint[5];
         return (<Link to={link}>{link}</Link>)
     } else if (isBoolean(item)){
-        if (item) return '💖'
-        else return '🙅';
+        if (item) return '✔️'
+        else return '❌';
     } else {
         return item;
     }

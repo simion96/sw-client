@@ -5,5 +5,6 @@ export {
     getResource,
     getResourceSuccess,
     getResourceFail,
-    setFavouriteResource
+    setFavouriteResource,
+    clearErrors
 } from './swapi';
