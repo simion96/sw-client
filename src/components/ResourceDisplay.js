@@ -33,8 +33,57 @@ const dummyUser = {
     ],
     created: '2014-12-09T13:50:51.644000Z',
     edited: '2014-12-20T21:17:56.891000Z',
-    url: 'https://swapi.co/api/people/1/'
+    url: 'https://swapi.co/api/people/1/',
+    isFavourite: false
   }
+
+  
+const createStringDisplays = (val) => (
+    Object.keys(val).map(item => (
+        <div key={item}>
+            { Array.isArray(val[item]) && val[item].length > 0 ?
+                undefined:
+                <div className={classes.Row}>
+                    {item.replace('_', ' ')}:
+                    <span style={{float: "right"}}>
+                        {renderText(val[item])}
+                    </span>
+                </div>
+            }
+        </div>
+    ))
+)
+
+const createArrayDisplays = (val) => (
+    Object.keys(val).map(item => (
+        <div key={item + 1}>
+            { Array.isArray(val[item]) && val[item].length > 0 ?
+                <div className={classes.Column}>
+                    <div className={classes.Row}>
+                        {item}
+                    </div>
+                    {val[item].map(el => (
+                        <div key={el} className={classes.Row}>
+                            {renderText(el)}
+                        </div>
+                    ))}
+                </div>
+                : undefined
+            }
+        </div>
+    ))
+)
+
+//reusable function - reuse
+const renderText = (item) => {
+    if (item && typeof item === 'string' && item.startsWith('http')) {
+        const endpoint = item.split('/');
+        const link = '/' + endpoint[4] + '/' + endpoint[5]
+        return (<Link to={link}>{link}</Link>)
+    } else {
+        return item;
+    }
+}
 
 const ResourceDisplay = (props) => {
     const resourceUrl = props.location.pathname;
@@ -42,53 +91,6 @@ const ResourceDisplay = (props) => {
     const store = useSelector(state => state[resourceType]);
     //const redData = store.filter(res => res.url.endsWith(resourceUrl+'/'));
     const currentResource = dummyUser;
-
-    //reusable function - reuse
-    const renderText = (item) => {
-        if (item && typeof item === 'string' && item.startsWith('http')) {
-            const endpoint = item.split('/');
-            const link = '/' + endpoint[4] + '/' + endpoint[5]
-            return (<Link to={link}>{link}</Link>)
-        } else {
-            return item;
-        }
-    }
-
-    const createStringDisplays = (val) => (
-        Object.keys(val).map(item => (
-            <div key={item}>
-                { Array.isArray(val[item]) && val[item].length > 0 ?
-                    undefined:
-                    <div className={classes.Row}>
-                        {item.replace('_', ' ')}:
-                        <span style={{float: "right"}}>
-                            {renderText(val[item])}
-                        </span>
-                    </div>
-                }
-            </div>
-        ))
-    )
-
-    const createArrayDisplays = (val) => (
-        Object.keys(val).map(item => (
-            <div key={item + 1}>
-                { Array.isArray(val[item]) && val[item].length > 0 ?
-                    <div className={classes.Column}>
-                        <div className={classes.Row}>
-                            {item}
-                        </div>
-                        {val[item].map(el => (
-                            <div key={el} className={classes.Row}>
-                                {renderText(el)}
-                            </div>
-                        ))}
-                    </div>
-                    : undefined
-                }
-            </div>
-        ))
-    )
 
     return (
         <div id="container" className={classes.Container}>
@@ -107,7 +109,6 @@ const ResourceDisplay = (props) => {
             </div>
             )}
         </div>
-        
     );
 }
 

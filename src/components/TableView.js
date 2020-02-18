@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DataTable from '../layout/DataTable';
 import ExpandButton from '../layout/UI/Button/ExpandButton';
 import {Link} from 'react-router-dom';
+import { isBoolean } from 'util';
 
 const TableView = (props) => {
     const {resourceType} = props;
@@ -15,15 +16,42 @@ const TableView = (props) => {
         dispatch(actions.getResource(resourceType));
     }, []);
 
-    const renderText = (item) => {
-        if (item && typeof item === 'string' && item.startsWith('http')) {
+    const renderText = (item, url) => {
+        if (item && typeof item === 'string' && item.startsWith('http')) { //search for links
             const endpoint = item.split('/');
-            const link = endpoint[4] + '/' + endpoint[5]
+            const typeFromLink = endpoint[4];
+            const indexFromLink = endpoint[5];
+            const link = typeFromLink + '/' + indexFromLink;
             return (<Link to={link}>{link}</Link>)
-        } else {
+        }  else if (isBoolean(item)) {
+            const endpoint = url.split('/');
+            const typeFromLink = endpoint[4];
+            return favButton(item, typeFromLink, url);
+        }
+        else {
             return item;
         }
+
     }
+
+    const favButton = (isFav, resType, url) => {
+        if (isFav) {
+            return (
+                <button
+                    onClick={() => dispatch(actions.setFavouriteResource(resType, url))}>
+                    <img src={require('../assets/img/heart-outline-24-filled.png')}></img>
+                </button>
+            )
+        } else {
+            return (
+                <button
+                    onClick={() => dispatch(actions.setFavouriteResource(resType, url))}>
+                    <img src={require('../assets/img/heart-outline-24.png')}></img>
+                </button>
+            )
+        }
+    }
+
 
     return (
         <div>
@@ -36,7 +64,7 @@ const TableView = (props) => {
 
                                     {Array.isArray(resource[item]) && resource[item].length > 0 ? 
                                         <ExpandButton text={resource[item]}>Expand</ExpandButton> :
-                                        renderText(resource[item])
+                                        renderText(resource[item], resource.url)
                                     }
 
                                 </td>

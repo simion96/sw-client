@@ -33,6 +33,7 @@ const routes = (
 					/>
 					<Route
 						path={['/people/:id', '/starships/:id', '/vehicles/:id', '/species/:id', '/films/:id', '/planets/:id']}
+						exact
 						component={ResourceDisplay}
 						
 					/>

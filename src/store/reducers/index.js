@@ -19,8 +19,9 @@ const initialState = {
     starships_headers: []
 }
 
+//assumes all api responses have the same keys
 const getHeaders = (results) => {
-    return Object.keys(results[0]);
+    return ['Favourite'].concat(Object.keys(results[0]));
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,12 +36,33 @@ const reducer = (state = initialState, action) => {
                 loading: true
             };
         case actionTypes.FETCH_RESOURCE_SUCCESS:
+            let payload = action.payload.results.map(el => ({
+                isFavourite: false,
+                ...el
+            }));
             return {
                 ...state, 
                 loading: false, 
-                [action.resourceType]: [...state[action.resourceType]].concat(action.payload.results),
-                [action.resourceType+'_headers']: getHeaders(action.payload.results) 
+                [action.resourceType]: [...state[action.resourceType]].concat(payload),
+                [action.resourceType+'_headers']: getHeaders(action.payload.results)
             };
+        case actionTypes.SET_FAVOURITE_RESOURCE:
+            const prefix = 'https://swapi.co/api/';
+            const resIndex = state[action.payload.resourceType].findIndex(p => p.url === action.payload.url);
+
+            const copy = JSON.parse(JSON.stringify(state));
+            console.log(copy);
+
+            const newFavState = !copy[action.payload.resourceType][resIndex].isFavourite;
+            console.log(newFavState);
+            console.log(copy);
+
+            copy[action.payload.resourceType][resIndex].isFavourite = newFavState;
+            const updatedState = copy;
+
+            console.log(updatedState);
+            return updatedState;
+            
         default:
             return state;
     }

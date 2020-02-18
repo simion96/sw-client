@@ -9,3 +9,5 @@ export const FETCH_PEOPLE_SUCCESS = '@@internal/FETCH_PEOPLE_SUCCESS';
 export const FETCH_RESOURCE = '@@internal/FETCH_RESOURCE';
 export const FETCH_RESOURCE_FAILURE = '@@internal/FETCH_RESOURCE_FAILURE';
 export const FETCH_RESOURCE_SUCCESS = '@@internal/FETCH_RESOURCE_SUCCESS';
+
+export const SET_FAVOURITE_RESOURCE = '@@internal/SET_FAVOURITE_RESOURCE';
