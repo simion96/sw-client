@@ -49,7 +49,7 @@ const renderText = (item) => {
         return (<Link to={link}>{link}</Link>)
     } else if (isBoolean(item)){
         if (item) return '💖'
-        else return '💔'
+        else return '🙅';
     } else {
         return item;
     }

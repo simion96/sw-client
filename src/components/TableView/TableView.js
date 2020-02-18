@@ -19,7 +19,9 @@ const TableView = (props) => {
     });
 
     useEffect(() => {
-        dispatch(actions.getResource(resourceType));
+        if (data.length === 0) {
+            dispatch(actions.getResource(resourceType));
+        }
     }, []);
 
     const renderText = (item, url) => {
@@ -37,7 +39,6 @@ const TableView = (props) => {
         else {
             return item;
         }
-
     }
 
     const favButton = (isFav, resType, url) => {

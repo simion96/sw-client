@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 
 const browserHistory = createBrowserHistory();
 
+
 const routes = (
 	<Provider store={store}>
 		<Router history={browserHistory}>

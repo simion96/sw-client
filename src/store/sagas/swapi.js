@@ -4,7 +4,6 @@ import {getRoots, getRoot} from '../../api';
 import * as actions from "../actions/swapi";
 
 export function* fetchRootsSaga(action) {
-    const url = 'https://swapi.co/api/';
     try {
         const response = yield call(getRoots, action.resourceType);
         yield put(actions.getRootsSuccess(response));
