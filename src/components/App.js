@@ -5,6 +5,7 @@ const App = ({ children }) => (
 	<div className={'App'}>
 		<Navbar
 			color={'light'}
+			
 			light
 		>
 			<NavbarBrand href={'/'}>{'Star Wars Client'}</NavbarBrand>

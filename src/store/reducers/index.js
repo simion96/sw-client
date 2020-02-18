@@ -36,9 +36,12 @@ const reducer = (state = initialState, action) => {
                 loading: true
             };
         case actionTypes.FETCH_RESOURCE_SUCCESS:
-            let payload = action.payload.results.map(el => ({
-                isFavourite: false,
-                ...el
+            const favs = JSON.parse(localStorage.getItem('favourites') || '[]');
+            const payload = action.payload.results.map(el => ({
+                isFavourite: favs.includes(el.url),
+                ...el,
+                created: new Date(el.created).toISOString().substring(0, 10),
+                edited: new Date(el.edited).toISOString().substring(0, 10)
             }));
             return {
                 ...state, 
@@ -47,22 +50,12 @@ const reducer = (state = initialState, action) => {
                 [action.resourceType+'_headers']: getHeaders(action.payload.results)
             };
         case actionTypes.SET_FAVOURITE_RESOURCE:
-            const prefix = 'https://swapi.co/api/';
             const resIndex = state[action.payload.resourceType].findIndex(p => p.url === action.payload.url);
+            const updatedState = JSON.parse(JSON.stringify(state));
 
-            const copy = JSON.parse(JSON.stringify(state));
-            console.log(copy);
-
-            const newFavState = !copy[action.payload.resourceType][resIndex].isFavourite;
-            console.log(newFavState);
-            console.log(copy);
-
-            copy[action.payload.resourceType][resIndex].isFavourite = newFavState;
-            const updatedState = copy;
-
-            console.log(updatedState);
+            const newFavState = !updatedState[action.payload.resourceType][resIndex].isFavourite;
+            updatedState[action.payload.resourceType][resIndex].isFavourite = newFavState;
             return updatedState;
-            
         default:
             return state;
     }

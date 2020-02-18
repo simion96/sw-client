@@ -45,7 +45,7 @@ export const getResourceFail = error => {
 export const setFavouriteResource = (resourceType, url) => {
     (function() {
         let favs = JSON.parse(localStorage.getItem('favourites') || '[]');
-        favs.push(url);
+        if (!favs.includes(url)) favs.push(url);
         localStorage.setItem('favourites', JSON.stringify(favs));
     })();
     return {

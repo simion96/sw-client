@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TableView from './TableView';
+import Loading from '../layout/UI/Loading/Loading';
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Home = () => {
 	return (
 		<div>
 			<h1>{'My little Star Wars app 👾'}</h1>
-			{loading ? 'loading' : 'not loading'}
+			{loading ? <Loading isLoading={loading} /> : null}
 			{keys  && (
 				<div className={'mt-3'}>
 					<Nav tabs>
