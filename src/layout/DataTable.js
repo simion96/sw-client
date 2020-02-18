@@ -1,8 +1,5 @@
 import React from 'react';
-import classes from './DataTable.module.css';
 import styled from 'styled-components';
-
-
 
 const DataTable = ({children, columns}) => (
     <StyledTable>
@@ -10,7 +7,7 @@ const DataTable = ({children, columns}) => (
             <tr>
                 {columns.map(col => (
                     <th key={col} style={{widths: 'auto', float: 'top'}}>
-                        {col.replace('_', ' ')}
+                        {col.replace(/_/g, ' ')}
                     </th>
                 ))}
             </tr>
