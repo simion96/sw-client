@@ -7,6 +7,7 @@ import {
 	NavLink,
 	TabContent,
 	TabPane,
+	Button
 } from 'reactstrap';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,9 +30,9 @@ const Home = () => {
 	return (
 		<div>
 			<h1>{'My little Star Wars app 👾'}</h1>
-			<button onClick={()=> setFavouritesActive(!favouritesActive)} style={{float: 'right'}}>
+			<Button color='info' onClick={()=> setFavouritesActive(!favouritesActive)} style={{float: 'right'}}>
 					Toggle Favourites
-			</button>
+			</Button>
 			{loading ? <Loading isLoading={loading} /> : null}
 			{keys  && (
 				<div className={'mt-3'}>
